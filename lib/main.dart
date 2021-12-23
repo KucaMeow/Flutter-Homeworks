@@ -1,6 +1,8 @@
 import 'package:first_project/homework_1.dart';
 import 'package:flutter/material.dart';
 
+import 'homework_2.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -56,16 +58,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               builder: (context) =>
                               const HomeWork1(title: 'Домашняя работа 1')));
                         }),
-                    // ListTile(
-                    //     title: const Text(
-                    //       'Домашняя работа 2',
-                    //       style: TextStyle(color: Colors.deepPurple, fontSize: 16),
-                    //     ),
-                    //     onTap: () {
-                    //       Navigator.of(context).push(MaterialPageRoute(
-                    //           builder: (context) =>
-                    //           const HomeWork2(title: 'Домашняя работа 2')));
-                    //     }),
+                    ListTile(
+                        title: const Text(
+                          'Домашняя работа 2',
+                          style: TextStyle(color: Colors.deepPurple, fontSize: 24),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                              const HomeWork2(title: 'Домашняя работа 2')));
+                        }),
                   ],
                 ),
               ),
