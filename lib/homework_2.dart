@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'data/chat_data.dart';
 import 'model/entities.dart';
@@ -46,30 +47,7 @@ class _HomeWork2State extends State<HomeWork2> {
               child: Column(
                 children: [
                   Expanded(
-                    child: ListView(
-                      children: messageStorage.data.map((item) {
-                        return ListTile(
-                          title: RichText(
-                            text: TextSpan(
-                              children: [
-                                const WidgetSpan(
-                                  child: Icon(Icons.message, size: 16,)
-                                ),
-                                const TextSpan(text: '  '),
-                                TextSpan(
-                                  text: item.author + ': ' + item.message,
-                                  style: item.author != currentUserName ?
-                                  const TextStyle(
-                                      color: Colors.black54, fontSize: 16) :
-                                  const TextStyle(
-                                      color: Colors.black38, fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
+                    child: Messages(messageStorage),
                   ),
                   Row(
                     children: [
@@ -90,6 +68,51 @@ class _HomeWork2State extends State<HomeWork2> {
               ),
             )),
       ),
+    );
+  }
+}
+
+class Messages extends StatefulWidget {
+
+  final MessageStateManager messageStore;
+
+  const Messages(this.messageStore);
+
+  @override
+  _MessagesState createState() => _MessagesState();
+
+}
+class _MessagesState extends State<Messages> {
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+        builder: (context) =>
+            ListView.builder(
+              itemBuilder: (ctx, i) {
+                return ListTile(
+                  title: RichText(
+                    text: TextSpan(
+                      children: [
+                        const WidgetSpan(
+                            child: Icon(Icons.message, size: 16,)
+                        ),
+                        const TextSpan(text: '  '),
+                        TextSpan(
+                          text: widget.messageStore.data[i].author + ': ' +
+                              widget.messageStore.data[i].message,
+                          style: widget.messageStore.data[i].author != currentUserName ?
+                          const TextStyle(
+                              color: Colors.black54, fontSize: 16) :
+                          const TextStyle(
+                              color: Colors.black38, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              itemCount: widget.messageStore.data.length,
+            )
     );
   }
 }
