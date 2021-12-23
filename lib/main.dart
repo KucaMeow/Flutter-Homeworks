@@ -1,6 +1,6 @@
-import 'package:first_project/homework_1.dart';
 import 'package:flutter/material.dart';
 
+import 'homework_1.dart';
 import 'homework_2.dart';
 
 void main() {
